@@ -11,19 +11,14 @@ import {
 } from "rxjs";
 import { tap, catchError, concatMap, shareReplay } from "rxjs/operators";
 import { Router } from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   auth0Client$ = (from(
-    createAuth0Client({
-      domain: "mowamed.auth0.com",
-      client_id: "LGYoHVP8w9iFdgoAU166OlT2VpA8gDUj",
-      redirect_uri: `${window.location.origin}`,
-      audience: "http://finale-project-expense-manager.com",
-      scope: "openid profile email read:users"
-    })
+    createAuth0Client(environment.auth0)
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1),
     catchError(err => throwError(err))
@@ -104,7 +99,7 @@ export class AuthService {
   logout() {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       client.logout({
-        client_id: "LGYoHVP8w9iFdgoAU166OlT2VpA8gDUj",
+        client_id: environment.auth0.client_id,
         returnTo: `${window.location.origin}`
       });
     });

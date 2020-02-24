@@ -4,12 +4,13 @@ import { filter, map, shareReplay, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { AddExpense } from "../models/addExpense";
 import { Expense } from "../models/expense";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class ExpenseService {
-  baseUrl = "https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev";
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 

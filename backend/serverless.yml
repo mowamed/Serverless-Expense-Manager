@@ -11,8 +11,8 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
 
-# package:
-#   individually: true
+ package:
+   individually: true
 
 provider:
   name: aws
