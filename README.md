@@ -1,6 +1,6 @@
 # Serverless Expense Manager
 
-This is the submission of Cloud Developer Nanodegree Capstone project. i've implemented a Simple Expense Manager application using AWS Lambda and Serverless framework in the backend aand Angular 8 in the frontend.
+This is the submission of Cloud Developer Nanodegree Capstone project. i've implemented a Simple Expense Manager application using AWS Lambda and Serverless framework in the backend and Angular 8 in the frontend.
 
 # Functionality of the application
 
@@ -12,13 +12,13 @@ the frontend have been deployed as a static website using S3 and CloudFront as a
 - frontend link [https://d16t0bma8g1do4.cloudfront.net](https://d16t0bma8g1do4.cloudfront.net)
 
 # Tech Stack
-##frontend
+## frontend
 - Angular 8
 - Angular Material and FlexLayout
 - Auth0 for authentication
 - AWS S3
 - AWS CloudFront
-##backend
+## backend
 - Serverless Framework
 - NodeJS
 - AWS Lambda
