@@ -1,0 +1,97 @@
+<div
+  fxFill
+  fxLayout="column"
+  fxLayoutAlign="space-around stretch"
+  class="add-expense-form"
+>
+  <form
+    [formGroup]="expenseForm"
+    name="expenseForm"
+    novalidate
+  >
+    <mat-card
+      fxLayout="column"
+      fxLayoutAlign="space-around stretch"
+      class="example-card"
+    >
+      <mat-card-header>
+        <mat-card-title *ngIf="!isUpdateExpense">Add new expense</mat-card-title>
+        <mat-card-title *ngIf="isUpdateExpense">Update expense</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
+
+        <!-- Amount Input -->
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input formControlName="amount" type="number" matInput />
+          <span matPrefix>$&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-error>
+            Amount is required!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" name="category">
+            <mat-option value="transport">
+              Transport
+            </mat-option>
+
+            <mat-option value="bill">
+              Bill
+            </mat-option>
+
+            <mat-option value="food">
+              Food
+            </mat-option>
+
+            <mat-option value="entertainment">
+              Entertainment
+            </mat-option>
+
+            <mat-option value="others">
+              Others
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            Category is required!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input formControlName="expenseDate" matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            Date is required!
+          </mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-actions *ngIf="!formSubmitted" fxLayoutAlign="end end">
+        <button mat-button color="warn" (click)="cancel()">Cancel</button>
+        <button *ngIf="!isUpdateExpense" mat-raised-button color="primary" (click)="submitForm()" [disabled]="expenseForm.invalid">Add</button>
+        <button *ngIf="isUpdateExpense" mat-raised-button color="primary" (click)="updateExpense()" [disabled]="expenseForm.invalid">Update</button>
+      </mat-card-actions>
+
+      <mat-card-actions *ngIf="formSubmitted" fxLayoutAlign="end end">
+        <button mat-button>
+          <mat-spinner diameter="25"></mat-spinner>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  </form>
+</div>

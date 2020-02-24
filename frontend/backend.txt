@@ -1,0 +1,35 @@
+Service Information
+service: expense-manager-app
+stage: dev
+region: us-east-1
+stack: expense-manager-app-dev
+resources: 51
+api keys:
+  None
+endpoints:
+  GET - https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev/expenses
+  POST - https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev/expenses
+  PATCH - https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev/expenses/{expenseId}
+  DELETE - https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev/expenses/{expenseId}
+  POST - https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev/expenses/{expenseId}/image
+functions:
+  Auth: expense-manager-app-dev-Auth
+  GetExpenses: expense-manager-app-dev-GetExpenses
+  CreateExpense: expense-manager-app-dev-CreateExpense
+  UpdateExpense: expense-manager-app-dev-UpdateExpense
+  DeleteExpense: expense-manager-app-dev-DeleteExpense
+  GenerateUploadUrl: expense-manager-app-dev-GenerateUploadUrl
+layers:
+  None
+
+Stack Outputs
+AuthLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-Auth:1
+CreateExpenseLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-CreateExpense:1
+GenerateUploadUrlLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-GenerateUploadUrl:1
+DeleteExpenseLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-DeleteExpense:1
+GetExpensesLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-GetExpenses:1
+UpdateExpenseLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:574544937123:function:expense-manager-app-dev-UpdateExpense:1
+ServiceEndpoint: https://xm6pd9tj3g.execute-api.us-east-1.amazonaws.com/dev
+ServerlessDeploymentBucketName: expense-manager-app-dev-serverlessdeploymentbucke-1l1ubvaaflhwb
+
+Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.

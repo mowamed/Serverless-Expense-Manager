@@ -1,0 +1,73 @@
+<div
+  class="home"
+  fxLayout="column"
+  fxLayoutAlign="space-around stretch"
+  fxLayoutGap="40px"
+>
+  <div fxLayout="row" fxLayoutAlign="space-between stretch" class="dashboard">
+    <div class="title">
+      <mat-card>
+        Hi {{(authService.userProfile$ | async)?.name}}
+      </mat-card>
+    </div>
+
+    <div class="amount">
+      <mat-card>
+        Total Expenses: {{totalExpense | currency}}
+      </mat-card>
+    </div>
+  </div>
+
+  <div
+    fxLayout="column"
+    fxLayoutAlign="space-around stretch"
+    fxLayoutGap="40px"
+    class="expense-list"
+    *ngIf="expenseList$ | async;let expenses"
+  >
+    <mat-card class="expense-card" *ngFor="let expense of expenses">
+      <mat-card-header>
+        <mat-card-subtitle>{{expense.expenseDate | date:'fullDate'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="expense-info">
+          <mat-list role="list">
+            <mat-list-item role="listitem">{{expense.category | titlecase}} &nbsp; {{expense.amount | currency}}</mat-list-item>
+          </mat-list>
+        </div>
+        <div class="expense-picture" *ngIf="expense.attachmentUrl">
+          <img
+            mat-card-image
+            src="{{expense.attachmentUrl}}"
+          />
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button [routerLink]="['/expense', expense.expenseId]">See details</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="home-zero-state" fxFill fxLayout="column" fxLayoutAlign="center center" *ngIf="expenses?.length < 1">
+      <h2>Looks like you haven't made any expense yet!</h2>
+      <h4>Click below to add a new expense</h4>
+    </div>
+
+  </div>
+
+
+  <div class="home-zero-state" *ngIf="!(expenseList$ | async)">
+    <h4>fetching your expenses...</h4>
+  </div>
+
+</div>
+<div class="fab-button">
+  <button
+    class="extended-fab-button"
+    mat-fab
+    color="primary"
+    (click)="openAddNewExpense()"
+  >
+    <mat-icon>add</mat-icon>
+    <span class="extended-fab-button__text">Add New Expense</span>
+  </button>
+</div>

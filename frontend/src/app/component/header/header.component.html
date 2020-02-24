@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <div fxLayout="row" fxLayoutAlign="center center" routerLink="/">
+      Expense Manager
+    </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="20px">
+        <li>
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>person_outline</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="authService.loggedIn" (click)="authService.logout()" mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              Sign out
+            </button>
+            <button *ngIf="!authService.loggedIn" (click)="authService.login('/')" mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              Sign in
+            </button>
+          </mat-menu>
+
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

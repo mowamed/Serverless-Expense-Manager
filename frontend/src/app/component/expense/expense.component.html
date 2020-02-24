@@ -1,0 +1,80 @@
+<div
+  class="home"
+  fxLayout="column"
+  fxLayoutAlign="space-around stretch"
+  fxLayoutGap="40px"
+>
+  <div fxLayout="row" fxLayoutAlign="space-between stretch" class="dashboard">
+    <div class="title">
+      <button
+        routerLink="/"
+        class="extended-fab-button"
+        mat-fab
+        color="primary"
+      >
+        <mat-icon>keyboard_backspace</mat-icon>
+        <span class="extended-fab-button__text">back</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    fxLayout="column"
+    fxLayoutAlign="space-around stretch"
+    fxLayoutGap="80px"
+    class="expense-list"
+    *ngIf="expense$ | async; let expense"
+  >
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item role="listitem">{{ expense.category | titlecase}}</mat-list-item>
+          <mat-list-item role="listitem">
+            {{expense.description}} &nbsp; {{expense.amount | currency}}
+          </mat-list-item>
+          <mat-list-item role="listitem">{{
+            expense.expenseDate | date: "fullDate"
+          }}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="end end">
+        <button mat-button color="warn" (click)="deleteExpense(expense.expenseId)">Delete</button>
+        <button mat-raised-button color="accent" (click)="openEditExpense(expense)">Edit</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card
+      *ngIf="expense.attachmentUrl"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <div class="picture">
+        <img
+          mat-card-image
+          src="{{expense.attachmentUrl}}"
+        />
+      </div>
+    </mat-card>
+
+    <input
+      style="display: none"
+      type="file"
+      (change)="onFileChanged($event, expense)"
+      id="fileInput"
+    />
+
+  </div>
+  <div class="fab-button">
+    <button
+      class="extended-fab-button"
+      (click)="selectPicture()"
+      mat-fab
+      color="primary"
+    >
+      <mat-icon>{{imageIcon}}</mat-icon>
+      <span class="extended-fab-button__text">{{ status }}</span>
+    </button>
+  </div>
+</div>
+
+
